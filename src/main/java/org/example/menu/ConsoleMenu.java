@@ -10,12 +10,13 @@ import java.util.Scanner;
 
 public class ConsoleMenu {
     private final Shelter<Animal> shelter;
-    private final Scanner scanner =  new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
+
     public ConsoleMenu(Shelter<Animal> shelter) {
         this.shelter = shelter;
     }
 
-    public void start(){
+    public void start() {
         boolean running = true;
 
         while (running) {
@@ -39,21 +40,21 @@ public class ConsoleMenu {
         }
     }
 
-    private void findSpecies(){
+    private void findSpecies() {
         System.out.print("Species: ");
         String species = validStringInput();
         printAnimals(shelter.findBySpecies(species));
     }
 
-    private void adoptAnimal(){
+    private void adoptAnimal() {
         System.out.print("Animal ID: ");
         String id = scanner.nextLine();
         System.out.print("Adopter name: ");
         String adopterName = validStringInput();
-        shelter.markAsAdopted(id,adopterName);
+        shelter.markAsAdopted(id, adopterName);
     }
 
-    private void addAnimal(){
+    private void addAnimal() {
         System.out.print("Species: ");
         String species = validStringInput();
         System.out.print("Name: ");
@@ -74,18 +75,18 @@ public class ConsoleMenu {
         }
     }
 
-    private String validStringInput(){
+    private String validStringInput() {
         String stringInput = scanner.nextLine();
-        if (stringInput.isEmpty()){
+        if (stringInput.isEmpty()) {
             System.out.println("Input cannot be empty");
             return validStringInput();
         }
         return stringInput;
     }
 
-    private int validNumber(){
+    private int validNumber() {
         String input = scanner.nextLine();
-        if (input.isEmpty()){
+        if (input.isEmpty()) {
             System.out.println("Input cannot be empty");
             return validNumber();
         }
@@ -98,20 +99,20 @@ public class ConsoleMenu {
             return validNumber();
         }
 
-        if (number < 0){
+        if (number < 0) {
             System.out.println("Number cannot be negative");
             return validNumber();
         }
         return number;
     }
 
-    private void printAnimals(List<Animal> animals){
+    private void printAnimals(List<Animal> animals) {
         for (Animal animal : animals) {
             System.out.println(animal);
         }
     }
 
-    private void printAdoptionHistory(){
+    private void printAdoptionHistory() {
         List<AdoptionRecord> history = shelter.getAdoptionHistory();
         if (history.isEmpty()) {
             System.out.println("No adoptions yet.");
@@ -121,7 +122,7 @@ public class ConsoleMenu {
         }
     }
 
-    private void printStatistics(){
+    private void printStatistics() {
         List<Animal> animals = shelter.getAllAnimals();
 
         System.out.println("Average age: " + util.averageAge(animals));
@@ -134,7 +135,7 @@ public class ConsoleMenu {
 
     }
 
-    private void printMenu(){
+    private void printMenu() {
         System.out.println("""
                 1. Add animal
                 2. List all animals

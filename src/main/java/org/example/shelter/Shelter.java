@@ -9,19 +9,19 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class Shelter <T extends Animal>{
+public class Shelter<T extends Animal> {
     private final List<T> animals = new ArrayList<>();
     private final List<AdoptionRecord> adoptionHistory = new ArrayList<>();
 
-    public void addAnimal(T animal){
+    public void addAnimal(T animal) {
         animals.add(animal);
     }
 
-    public List<T> getAllAnimals(){
+    public List<T> getAllAnimals() {
         return animals;
     }
 
-    public List<T> findBySpecies(String species){
+    public List<T> findBySpecies(String species) {
         List<T> result = new ArrayList<>();
         for (T animal : animals) {
             if (animal.getSpecies().equals(species)) {
@@ -31,7 +31,7 @@ public class Shelter <T extends Animal>{
         return result;
     }
 
-    public List<T> findAvailableAnimals(){
+    public List<T> findAvailableAnimals() {
         List<T> result = new ArrayList<>();
         for (T animal : animals) {
             if (animal.getAdoptionStatus() == AdoptionStatus.AVAILABLE) {
@@ -41,7 +41,7 @@ public class Shelter <T extends Animal>{
         return result;
     }
 
-    public void markAsAdopted(String id, String adopterName){
+    public void markAsAdopted(String id, String adopterName) {
         for (T animal : animals) {
             if (animal.getId().toString().equals(id) && animal.getAdoptionStatus() == AdoptionStatus.AVAILABLE) {
                 animal.markAsAdopted();
@@ -51,15 +51,18 @@ public class Shelter <T extends Animal>{
         }
         System.out.println("No available animal with ID " + id);
     }
-    public List<AdoptionRecord> getAdoptionHistory(){return adoptionHistory;}
 
-    public List<T> sortByName(){
+    public List<AdoptionRecord> getAdoptionHistory() {
+        return adoptionHistory;
+    }
+
+    public List<T> sortByName() {
         List<T> result = new ArrayList<>(animals);
         result.sort(Comparator.comparing(Animal::getName));
         return result;
     }
 
-    public List<T> sortByAge(){
+    public List<T> sortByAge() {
         List<T> result = new ArrayList<>(animals);
         result.sort(Comparator.comparing(Animal::getAge));
         return result;
